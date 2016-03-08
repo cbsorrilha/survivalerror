@@ -1,4 +1,11 @@
 # -*- coding: UTF-8 -*-
+
+officeKey = False
+sawMonster = False
+haveShotgun = False
+
+
+
 def help():
     print """
     ===SURVIVALERROR 1.0========================================
@@ -10,8 +17,8 @@ def help():
     If you have a weapon and want to shot 'x', type: \"shot 'x'\"
     To simply look around, type: \"look\"
     this will give you a description of the place you're in.
-    CTRL + C or quit on any momento to exit.
-    YOUR PROGRESS DO NOT WILL BE SAVED!
+    CTRL + C or quit on any moment to exit.
+    YOUR PROGRESS WILL NOT BE SAVED!
 
     Obs: Ever use uncapitalized case letters.
 
@@ -62,40 +69,69 @@ def foyer():
 
 
 def corridor():
+    global sawMonster
+    global haveShotgun
+    global officeKey
+
     print """
     You enter on a long, barely iluminated corridor with three doors.
     One on the left wall(1) and two on the right wall (2, 3).
     In the end of the corridor is another door (4).
+    You hear a click. The door from where you came is now blocked
+    from the otherside.
     What will you do?
     """
+
     while True:
         action = raw_input("> ")
+
+
+        isPrepared = sawMonster == True and haveShotgun == True
+        isNotPrepared = sawMonster == True and haveShotgun == False
+
+        # print isPrepared
+        # print isNotPrepared
 
         if action == 'help':
             help()
         elif action == 'interact door' or action == 'look door':
             print "Winch door?"
-        elif action == 'interact door 1':
-            print "You enter the leftside door"
         elif action == 'look door 1':
-            print "there is a sign saying: Restroom"
-        elif action == 'interact door 2':
-            print "You enter the first right door"
+            print "there is a sign: Restroom"
+        elif action == 'interact door 1':
+            print "Room"
         elif action == 'look door 2':
-            print "There is a sign on the door saying: Weapons Room"
-        elif action == 'interact door 3':
-            print "You enter the second right door"
+            print "There is a sign: Weapons Room"
+        elif action == 'interact door 2':
+            print "The door is locked."
         elif action == 'look door 3':
-            print "There is a sign saying: office"
-        elif action == 'interact door 4':
-            print "You enter the monster door"
-        elif action == 'look door 4':
-            print "A heavy wooden door."
-        elif action == 'interact door 0':
-            print "You're locked in the corridor, the foyer door is locked."
+            print "There is a sign: Office"
+        elif action == 'interact door 3' and officeKey == False:
+            print "The door is locked."
+        elif action == 'interact door 3' and officeKey == True:
+            print "Office"
+        elif action == 'look door 4' and sawMonster == False:
+            print "A heavy wooden door. No signs."
+        elif action == 'look door 4' and sawMonster == True:
+            print "The door where'd you saw the monster."
+        elif action == 'interact door 4' and sawMonster == False:
+            print "Monster"
+            sawMonster = True
+        elif action == 'interact door 4' and isNotPrepared:
+            print "Is better to only go back there with a gun."
+        elif action == 'interact door 4' and isPrepared:
+            print "Monster"
+        elif action == 'interact door 0' or action == 'look door 0':
+            print "You're locked in the corridor, the foyer door is blocked by something on the other side."
+        # elif action == 'summon shotgun':
+        #     print "A shotgun appears in your hands like magic"
+        #     haveShotgun = True
+        # elif action == 'summon office key':
+        #         print "The office key appears in your hands like magic"
+        #         officeKey = True
         else:
-            print "I don't know what you mean."
+            print "I don't know what it means."
 
 
 
-foyer()
+corridor()
