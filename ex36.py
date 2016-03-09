@@ -149,6 +149,7 @@ My father is a really cautious man.
 """
 
 def room():
+    global officeKey
     print"""
 You've entered a cozy room. There are beige walls, wooden floor
 and soft lights.
@@ -167,12 +168,24 @@ What will you do?
         elif rest:
             print "There's no need to rest now";
         elif action == "look chair":
-            print "A wooden chair. Looks Rusty."
+            print "A wooden chair. Rustic."
         elif action == "look book":
             print "A book with a black cover, probably made of leather."
         elif action == "interact book":
             print Diary()
-        elif action == ""
+        elif action == "look dressing table":
+            print "An old dressing table with a drawer"
+        elif action == "interact dressing table":
+            print "You open the drawer and it reveal a key"
+        elif action == "look key" or action == 'interact key':
+            print "A key. Wonder what door it opens"
+        elif action == "pick key":
+            print "You have picked the key"
+            officeKey = True
+        elif action == "look door":
+            print "The door from where you came"
+        elif action == "interact door":
+            corridor()
         else:
             print "I don't know what it means"
 
