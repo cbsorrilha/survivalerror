@@ -113,7 +113,7 @@ What will you do?
         elif action == 'interact door 3' and officeKey == False:
             print "The door is locked."
         elif action == 'interact door 3' and officeKey == True:
-            print "Office"
+            office()
         elif action == 'look door 4' and sawMonster == False:
             print "A heavy wooden door. No signs."
         elif action == 'look door 4' and sawMonster == True:
@@ -183,11 +183,11 @@ What will you do?
             print "You have picked the key"
             officeKey = True
         elif action == "look door":
-            print "The door from where you came"
+            print "The door where you came from"
         elif action == "interact door":
             corridor()
         else:
             print "I don't know what it means"
 
 
-room()
+# foyer()
