@@ -1,8 +1,10 @@
 # -*- coding: UTF-8 -*-
-
+haveKey = False
+keyRevealed = False
 officeKey = False
 sawMonster = False
 haveShotgun = False
+secretEntrance = False
 
 
 
@@ -29,6 +31,8 @@ A game by Cesar de Barros <cbsorrilha@hotmail.com> 2016
 
 def foyer():
     global haveShotgun
+    global haveKey
+    global keyRevealed
     print """
 You enter a dark foyer with your clothes wet because of the rain.
 You can hear the thunders outside.
@@ -36,8 +40,7 @@ The door behind you got locked after you enter.
 There's another door on the foyer, a rugged mat with the word 'Welcome'
 and a little corner table with a plant on top of it.
     """
-    haveKey = False
-    keyRevealed = False
+
 
     while True:
         action = raw_input("> ")
@@ -47,6 +50,8 @@ and a little corner table with a plant on top of it.
 
         if action == 'help':
             help()
+        elif action == "look":
+            foyer()
         elif action == 'interact door' and haveKey == False:
             print "The door is locked."
         elif action == 'interact door' and haveKey == True:
@@ -98,12 +103,14 @@ What will you do?
 
         if action == 'help':
             help()
+        elif action == "look":
+            corridor()
         elif action == 'interact door' or action == 'look door':
             print "Winch door?"
         elif action == 'look door 1':
             print "there is a sign: Restroom"
         elif action == 'interact door 1':
-            print "Room"
+            room()
         elif action == 'look door 2':
             print "There is a sign: Weapons Room"
         elif action == 'interact door 2':
@@ -165,6 +172,8 @@ What will you do?
 
         if action == "help":
             help()
+        elif action == "look":
+            room()
         elif rest:
             print "There's no need to rest now";
         elif action == "look chair":
@@ -189,5 +198,66 @@ What will you do?
         else:
             print "I don't know what it means"
 
+def office():
+    global secretEntrance
+    print"""
+You've entered a simple but well iluminated office. There is a desk with
+some papers and a old typewritter on it, a bookshelf that takes the whole
+right wall and an empty trashcan. There's no chair for the desk and there's
+no ink on the typewritter.
+    """
+    while True:
+        action = raw_input("> ")
 
+        if action == "help":
+            help()
+        elif action == "look":
+            office()
+        elif action == "look typewritter":
+            print "An old typewritter."
+        elif action == "interact typewritter":
+            print "That's do nothing"
+        elif action == "save game":
+            print "What do you mean? You have no ink ribbons, dude!"
+        elif action == "look desk":
+            print "A simple wooden desk with some papers above it"
+        elif action == "interact desk":
+            print "There's nothing to do with it"
+        elif action == "look papers":
+            print "Some papers above the desks. Looks like old documents"
+        elif action == "interact papers":
+            print """
+Nothing to see here. Only a strange code:
+VzRSR2FtZXJzIENvbWFuZGFtIQ==
+            """
+        elif action == "look bookshelf":
+            print """
+An old bookshelf with many dusty books on it. Only one book is clean:
+\"1000 meals for a healthy life\".
+            """
+        elif action == "interact bookshelf":
+            print "You only dirty your hands"
+        elif action == "look clean book":
+            print "A book with the title: \"1000 meals fot a healthy life\"."
+        elif action == "interact clean book":
+            print "That's do nothing."
+        elif action == "pick clean book":
+            print "The bookshelf wall has moved out. Revealing an secret door"
+        elif action == "look secret door" or action == "interact secret door" and secretEntrance == False:
+            print "I don't know what it means. There's no secret door. >.>"
+        elif action == "look secret door" and secretEntrance == True:
+            print "A common secret door. If you can say a secret door is a common thing '-'"
+        elif action == "interact secret door" and secretEntrance == False:
+            weapons_room()
+        elif action == "look door":
+            print "The door where you came from"
+        elif action == "interact door":
+            corridor()
+        else:
+            print "I don't know what it means"
+
+
+
+
+office()
 # foyer()
