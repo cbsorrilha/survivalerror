@@ -39,6 +39,7 @@ You can hear the thunders outside.
 The door behind you got locked after you enter.
 There's another door on the foyer, a rugged mat with the word 'Welcome'
 and a little corner table with a plant on top of it.
+What will you do?
     """
 
 
@@ -126,8 +127,7 @@ What will you do?
         elif action == 'look door 4' and sawMonster == True:
             print "The door where'd you saw the monster."
         elif action == 'interact door 4' and sawMonster == False:
-            print "Monster"
-            sawMonster = True
+            monster()
         elif action == 'interact door 4' and isNotPrepared:
             print "Is better to only go back there with a gun."
         elif action == 'interact door 4' and isPrepared:
@@ -205,6 +205,7 @@ You've entered a simple but well iluminated office. There is a desk with
 some papers and a old typewritter on it, a bookshelf that takes the whole
 right wall and an empty trashcan. There's no chair for the desk and there's
 no ink on the typewritter.
+What will you do?
     """
     while True:
         action = raw_input("> ")
@@ -243,11 +244,12 @@ An old bookshelf with many dusty books on it. Only one book is clean:
             print "That's do nothing."
         elif action == "pick clean book":
             print "The bookshelf wall has moved out. Revealing an secret door"
+            secretEntrance = True
         elif action == "look secret door" or action == "interact secret door" and secretEntrance == False:
-            print "I don't know what it means. There's no secret door. >.>"
+            print "I don't know what it means. There's no secret door here. >.>"
         elif action == "look secret door" and secretEntrance == True:
             print "A common secret door. If you can say a secret door is a common thing '-'"
-        elif action == "interact secret door" and secretEntrance == False:
+        elif action == "interact secret door" and secretEntrance == True:
             weapons_room()
         elif action == "look door":
             print "The door where you came from"
@@ -256,8 +258,100 @@ An old bookshelf with many dusty books on it. Only one book is clean:
         else:
             print "I don't know what it means"
 
+def weapons_room():
+    global haveShotgun
+
+    print """
+When you enter, the secret door close and lock behind you.
+
+An empty room. There's nothing here. Nothing but a shiny shotgun
+framed on the wall. And a door leading to the corridor.
+You can unlock it by the latch near the door knob.
+What will you do?
+    """
+
+    while True:
+
+        action = raw_input("> ")
+
+        if action == "help":
+            help()
+        elif action == "look":
+            weapons_room()
+        elif action == "look secret door" or action == "interact secret door":
+            print "The secret door is locked. You can't return by it."
+        elif action == "look shotgun":
+            print """
+The answer to all you problems. The shotgun. This thing can be
+'mindblowing' if you know what i mean.
+"""
+        elif action == "interact shotgun":
+            print "Why you don't try to pick it, instead?"
+        elif action == "pick shotgun":
+            print "Now you have a shotgun. Be a hero."
+            haveShotgun = True
+        elif action == 'look door':
+            print "The door to the corridor"
+        elif action == 'interact door':
+            corridor()
+        else:
+            print "I don't know what it means"
+
+def monster():
+    global haveShotgun
+    global sawMonster
+
+    print """
+You enter a dark room. The only thing here is a dirty bathtub filled
+with something dark. When you get closer. A thing emerge from the putrid
+water on the bathub. It is half man half pig and in his head, chest and
+arms lacks some pices of flesh, showing their bones beneat the rotten skin.
+Your heart pouding of fear. You want to run away.
+What will you do?
+    """
+    sawMonster = True
+
+    while True:
+
+        action = raw_input("> ")
+
+        if action == "help":
+            help()
+        elif action == "look":
+            monster()
+        elif action == "look monster":
+            print "The monster roars trying to kill you"
+        elif action == "interact monster":
+            print "The monster beat you in the head. You die."
+            exit()
+        elif action == "shot monster" and haveShotgun:
+            print "You shot the monster in the head. It dies."
+            won()
+        elif action == "shot monster" and not haveShotgun:
+            print "How you pretend to shot it?"
+        elif action == "interact door":
+            corridor()
+        elif action == "look door":
+            print "The door that lead to the corridor"
+        # elif action == "summon shotgun":
+        #     print "A shotgun magically appears on your hands"
+        #     haveShotgun = True
+        else:
+            print "I don't know what it means"
 
 
 
-office()
-# foyer()
+def won():
+    print """
+Congratulations! You won the game!
+....
+Yeah, i know it's a shit.
+Thanks for playing.
+    """
+    exit()
+
+
+
+
+
+foyer()
